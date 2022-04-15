@@ -1,8 +1,9 @@
 import React from 'react';
+import { Home } from './pages/index'
 
 
 function App() {
-    return(<h1>react is working! woooo</h1>)
+    return(<Home />)
 
 
 
