@@ -1,0 +1,29 @@
+version: "3"
+services:
+  server:
+    image: node:12.18.4
+    working_dir: /code
+    ports:
+      - 3000:3000
+    environment:
+      - DB_NAME=quiz
+      - DB_CONNECTION=mongodb://gjam:quizpass@db:27017
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./server
+        target: /code
+    command: bash -c "npm install && npm start"
+
+  db:
+    image: mongo:latest
+    volumes:
+      - "dbdata:/var/lib/mongodb/data"
+      - "./db/seeds.js:/docker-entrypoint-initdb.d/seeds.js:ro"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=gjam
+      - MONGO_INITDB_DATABASE=quiz
+      - MONGO_INITDB_ROOT_PASSWORD=quizpass
+volumes:
+  dbdata:
