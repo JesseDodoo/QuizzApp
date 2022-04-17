@@ -7,7 +7,6 @@ import {useNavigate as Navigate} from 'react-router-dom';
 function Setup() {
 
     const goTo = Navigate();
-
     const [playerNumber, setPlayerNumber] = useState(0);
     const [questionNumber, setQuestionNumber] = useState(0);
     console.log('questionNumber', questionNumber)
