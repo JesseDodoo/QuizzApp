@@ -19,7 +19,7 @@ function Setup() {
     console.log('number of questions', questionNumber);
     console.log('difficulty', difficulty);
     console.log('type', triviaType);
-    console.log(" ")
+    console.log(" ");
 
 
 
