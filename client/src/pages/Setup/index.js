@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BackButton } from '../../components'
-import {useNavigate as Navigate} from 'react-router-dom';
+import { useNavigate as Navigate } from 'react-router-dom';
 
 
 
@@ -9,7 +9,17 @@ function Setup() {
     const goTo = Navigate();
     const [playerNumber, setPlayerNumber] = useState(0);
     const [questionNumber, setQuestionNumber] = useState(0);
-    console.log('questionNumber', questionNumber)
+    const [playerName, setPlayerName] = useState([])
+    const [category, setCategory] = useState();
+    const [difficulty, setDifficulty] = useState();
+    const [triviaType, setTriviaType] = useState();
+    playerName.length = playerNumber;
+    console.log('playerName', playerName);
+    console.log('category value', category);
+    console.log('number of questions', questionNumber);
+    console.log('difficulty', difficulty);
+    console.log('type', triviaType);
+    console.log(" ")
 
 
 
@@ -20,23 +30,47 @@ function Setup() {
     function renderPlayerInput() {
         let inputAreas = [];
         for (let i = 0; i < playerNumber; i++) {
-            inputAreas.push(<input type='text' key={i} placeholder="enter player name"></input>)
+            inputAreas.push(<input type='text' className = "nameInput" key={i} onChange={getPlayerName} placeholder="enter player name"></input>)
         }
         return inputAreas;
     }
 
-    function questionCount(e){
-        if(playerNumber !== 0){
-            if(e.target.value % playerNumber !== 0){
+    function getPlayerName(e){
+        let allPlayers = [];
+        let playerNameInput = document.getElementsByClassName('nameInput');
+        for(let i = 0; i < playerNumber; i++){
+            allPlayers[i] = {playerName:playerNameInput[i].value, score: 0}
+        }
+        setPlayerName(allPlayers)
+    }
+
+    function getCategory(e){
+        setCategory(e.target.value)
+
+    }
+
+    function getDifficulty(e){
+        setDifficulty(e.target.value)
+
+    }
+
+    function getTriviaType(e){
+        setTriviaType(e.target.value)
+
+    }
+
+    function questionCount(e) {
+        if (playerNumber !== 0) {
+            if (e.target.value % playerNumber !== 0) {
                 console.log(`must be a multiple of ${playerNumber}`)
             }
-            else{
+            else {
                 setQuestionNumber(parseInt(e.target.value))
             }
         }
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault()
         goTo("/quiz")
     }
@@ -65,7 +99,7 @@ function Setup() {
             {!playerNumber ? null : renderPlayerInput()}
             <br></br>
             <label>Category</label>
-            <select name="trivia_category">
+            <select onChange={getCategory} name="trivia_category">
                 <option value="any">Any Category</option>
                 <option value="9">General Knowledge</option>
                 <option value="10">Entertainment: Books</option>
@@ -93,21 +127,22 @@ function Setup() {
                 <option value="32">Entertainment: Cartoon &amp; Animations</option>
             </select>
             <br></br>
-            <select name="trivia_difficulty">
+            <select onChange={getDifficulty} name="trivia_difficulty">
                 <option value="any">Any Difficulty</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
             </select>
             <br></br>
-            <select name="trivia_type">&gt;
+            <select onChange={getTriviaType} name="trivia_type">&gt;
 			<option value="any">Any Type</option>
-			<option value="multiple">Multiple Choice</option>
-			<option value="boolean">True / False</option>
-		</select>
-        <input onChange={questionCount}type='number'></input>
-        <br></br>
-        <button type="submit">PLAY</button>
+                <option value="multiple">Multiple Choice</option>
+                <option value="boolean">True / False</option>
+            </select>
+            <br></br>
+            <input onChange={questionCount} type='number'></input>
+            <br></br>
+            <button type="submit">PLAY</button>
 
 
         </form>
