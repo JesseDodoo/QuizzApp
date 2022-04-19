@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Scores = (scores) => {
 
-  let scoreArray = scores.scores;
+  let scoreArray = scores.scores.sort((a,b) => parseInt(b.score) - parseInt(a.score));
   let rank = 0;
 
   return (
