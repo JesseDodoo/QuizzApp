@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BackButton } from '../../components'
 import { useNavigate as Navigate } from 'react-router-dom';
+import {getPlayers, getQuiz } from '../../actions';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -13,6 +15,7 @@ function Setup() {
     const [category, setCategory] = useState();
     const [difficulty, setDifficulty] = useState();
     const [triviaType, setTriviaType] = useState();
+    const dispatch = useDispatch();
     playerName.length = playerNumber;
     console.log('playerName', playerName);
     console.log('category value', category);
@@ -72,6 +75,8 @@ function Setup() {
 
     function handleSubmit(e) {
         e.preventDefault()
+        dispatch(getQuiz(questionNumber, category, difficulty, triviaType))
+        dispatch(getPlayers(playerName))
         goTo("/quiz")
     }
 
