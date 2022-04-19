@@ -1,4 +1,5 @@
 import React from 'react';
+import PaginationButtons from '../PaginationButtons';
 import Score from '../Score';
 
 const Scores = () => {
@@ -6,6 +7,9 @@ const Scores = () => {
     <div>
         score board
         <Score />
+
+
+        <PaginationButtons />
     </div>
   )
 }
