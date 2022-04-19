@@ -32,6 +32,34 @@ class Score {
       }
     });
   }
+
+  static updateScore(id,incrementor) {
+    return new Promise(async (res, rej) => {
+      try{
+        const db = await init();
+        const scoreData = await db.collection("scores").findOneAndUpdate({ id: id },{$inc:{"score": incrementor}}); 
+        let score = new Score(scoreData);
+        res(score)
+      }catch (error){
+        rej("Error updating score: " + error);
+      }
+    })
+  }
+
+  static newUser(username) {
+    return new Promise(async (res, rej) => {
+      try{
+        const db = await init();
+        const user = await db.collection("scores").insertOne({id: new ObjectId(), username: username})
+        let newUser = new Score(user.ops[0])
+        res(newUser)
+      } catch (error){
+        rej("Error creating user: " + error)
+      }
+    })
+  
+  }
 }
+
 
 module.exports = Score;
