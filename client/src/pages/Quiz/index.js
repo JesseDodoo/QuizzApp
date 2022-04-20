@@ -73,9 +73,9 @@ function Quiz() {
         //console.log("you clicked the button");
         //console.log("question number", questionNumber)
         questionChoice(questionNumber+1);
-        if (playerNumber >= (players.length - 1)) {
+        if (playerNumber === (players.length - 1)) {
             setPlayerNumber(0);
-            setPlayerToAnswer(players[playerNumber]);
+            setPlayerToAnswer(players[0]);
 
         }
         else {
@@ -88,15 +88,18 @@ function Quiz() {
             setQuestionAnswers([])
         }
         if(answerChosen === quiz[questionNumber].correct_answer){
-            console.log(`${playerToAnswer.playerName} answered ${answerChosen} it was correct!`);
+            console.log(`${players[playerNumber].playerName} answered ${answerChosen} it was correct!`);
             setAnswerChosen("");
-            let theUpdatedScore = playerToAnswer.score + 5;
-            dispatch(updateScore(playerToAnswer.playerName, theUpdatedScore))
-            playerToAnswer.score = theUpdatedScore;
-            console.log(theUpdatedScore)
+            let theUpdatedScore = players[playerNumber].score;
+            theUpdatedScore += 5;
+            dispatch(updateScore(players[playerNumber].playerName, theUpdatedScore))
+            players[playerNumber].score = theUpdatedScore;
+            playerToAnswer.playerName = players[playerNumber].playerName;
+            console.log("theUpdatedScore",theUpdatedScore)
+            console.log("playerToAnswer.score",players[playerNumber].score)
         }
         else{
-            console.log(`${playerToAnswer.playerName} answered ${answerChosen} it was incorrect!`);
+            console.log(`${players[playerNumber].playerName} answered ${answerChosen} it was incorrect!`);
             setAnswerChosen("");
         }
     }
