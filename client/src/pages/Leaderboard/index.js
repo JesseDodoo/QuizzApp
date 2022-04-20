@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackButton, Scores} from '../../components'
+import { BackButton, Scores, Pagination, TopScore} from '../../components'
 import { useState, useEffect} from 'react'
 import axios from 'axios';
 
@@ -9,32 +9,110 @@ function Leaderboard() {
     const conStr = 'http://localhost:3000/scores';
 
     const [scoresList,setScoresList] = useState([]);
-  
-    const getScoreList = async () => 
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [scoresPerPage,setScoresPerPage] = useState(5);
+
+    useEffect(() => 
     {
-        try
+      
+        const fetchScores = async () => 
         {
-            const resp = await axios.get(conStr);
-            console.log("scores: " +resp.data)
-            setScoresList(resp.data);
+            try{
+
+                //First rank will be 1
+                let rank = 1;
+
+                //Set loading status to true - we've started loading scores
+                setLoading(true);
+
+                //get the scores
+                const resp = await axios.get(conStr);
+
+                //Sort and add ranking
+                let scoreArray = resp.data.sort((a,b) => parseInt(b.score) - parseInt(a.score));
+                let rankedArray = scoreArray.map(score => ({...score, rank: rank++}) )
+
+                //Set state
+                setScoresList(rankedArray);
+
+                //We're done loading - set to false.
+                setLoading(false);
+            }
+            catch (err)
+            {
+                console.log(err);
+            }
         }
-        catch (err)
+        //Run fetchScores on page load.
+        fetchScores();
+    }, [])
+    
+
+    //Get current posts
+    const indexOfLastScore = currentPage * scoresPerPage;
+    const indexOfFirstScore = indexOfLastScore - scoresPerPage;
+    const currentScores = scoresList.slice(indexOfFirstScore, indexOfLastScore)
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
+    const clickPrev = () => {
+        if (currentPage > 1)
         {
-            console.log("couldn't get scores" + err);
+            setCurrentPage(currentPage -1);
         }
     }
-    
-    console.log(scoresList)
 
+    const clickNext = () => {
+        if (currentPage < Math.ceil(scoresList.length/scoresPerPage))
+        {
+            setCurrentPage(currentPage +1);
+        }
+    }
+
+    function changeScoresPerPage ()
+    {
+        const list = document.getElementById("ScoresPerPage")
+        setScoresPerPage(list.value)
+    }
+
+    console.log("Scorelist")
+    console.log(scoresList[0])
 
     return (
     <>
-        <h1>Leaderboard page</h1>
+        <h1 className="LeaderboardTitle">Leaderboard page</h1>
         <BackButton />
 
-        <button onClick = {getScoreList}> load</button>
+        {/* Select how many to show on page select */}
+        <label htmlFor="ScoresPerPage"># to show per page:</label>
+        <select name = 'ScoresPerPage' id = 'ScoresPerPage' className='ChangeScoresPerPageSelect'>
+            <option value = "5" defaultValue>5</option>
+            <option value = "10">10</option>
+            <option value = "25">25</option>
+            <option value = "50">50</option>
+            <option value = "100">100</option>
+        </select>
+        <button onClick={changeScoresPerPage} className = "ChangeScoresPerPageButton">Refresh</button>
 
-        {scoresList.length > 0 ? (<Scores scores = {scoresList} />) : 'No scores found' }      
+        <br/>
+
+        {/* Pagination buttons */}
+        <button onClick = {clickPrev} className="PaginationButton" >Prev</button>   
+        <Pagination scoresPerPage={scoresPerPage} totalScores={scoresList.length} paginate={paginate} />
+        <button  onClick = {clickNext} className="PaginationButton">Next</button>
+
+        {/* Output to generate scores */}
+
+        score board
+
+        {scoresList.length > 0? (<TopScore key = {scoresList[0].id} score={scoresList[0]} rank={scoresList[0].rank} />) : 'No top score found'}
+
+        <br/>
+        {scoresList.length > 0 ? (<Scores scores = {currentScores} loading={loading} />) : 'No scores found' }  
+
+
 
     </>)
 

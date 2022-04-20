@@ -1,21 +1,21 @@
 import React from 'react';
-import PaginationButtons from '../PaginationButtons';
 import { useState, useEffect} from 'react'
 import Score from '../Score';
 import axios from 'axios';
+import TopScore from '../TopScore';
 
 const Scores = (scores) => {
 
-  let scoreArray = scores.scores.sort((a,b) => parseInt(b.score) - parseInt(a.score));
+
   let rank = 0;
 
   return (
     <section>
-        score board
 
-        {scoreArray.map((score) => (<Score key = {score.id} score = {score} rank = {rank = rank + 1} /> ) )}
+        <h3> OTHER SCORES</h3>
 
-        <PaginationButtons />
+        {scores.scores.slice(1).map((score) => (<Score key = {score.id} score = {score} rank = {score.rank} /> ) )}
+
     </section>
   )
 }
