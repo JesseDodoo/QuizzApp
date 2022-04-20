@@ -10,36 +10,70 @@ function Quiz() {
     const [playerNumber, setPlayerNumber] = useState(Math.floor(Math.random() * players.length));
     const [playerToAnswer, setPlayerToAnswer] = useState(players[playerNumber].playerName);
     const [questionNumber, setQuestionNumber] = useState(0);
-    console.log("player to answer", playerToAnswer);
-    console.log('playerNumber', playerNumber)
-    console.log('the players', players);
-    console.log('the question number', quiz.length)
+    const [questionAnswers, setQuestionAnswers] = useState();
+    //console.log("player to answer", playerToAnswer);
+    //console.log('playerNumber', playerNumber)
+    //console.log('the players', players);
+    //console.log('quiz value', quiz)
+    //console.log('questionAnswers', questionAnswers)
 
-    function renderMultipleChoice() {
+
+    function questionChoice(questionNumber) {
+        let choiceArray = [];
+        if(quiz[questionNumber] === undefined){
+            console.log("oh no im  undefined")
+        }
+        else{
+            if (quiz[questionNumber].type === 'multiple') {
+                choiceArray.push(quiz[questionNumber].correct_answer);
+                for (let i = 0; i < quiz[questionNumber].incorrect_answers.length; i++) {
+                    choiceArray.push(quiz[questionNumber].incorrect_answers[i]);
+                }
+                choiceArray.sort(() => Math.random() - 0.5);
+                //console.log('choice array in questionChoice', choiceArray)
+                setQuestionAnswers(choiceArray);
+            }
+            else{
+                choiceArray = ['true', 'false']
+                setQuestionAnswers(choiceArray);
+
+            }
+
+        }
+        
+    }
+
+    function renderAnswers(){
+        if(questionAnswers === undefined){
+            questionChoice(questionNumber);
+        }
+        else{
+            return questionAnswers.map(answer => <h2>{answer}</h2>)
+        }
+  
 
     }
 
-    function renderTrueOrFalse() {
 
-    }
 
     function onSubmitAnswer(e) {
-        e.preventDefault()
-        console.log("you clicked the button")
+        setQuestionNumber(questionNumber+1)
+        e.preventDefault();
+        //console.log("you clicked the button");
+        //console.log("question number", questionNumber)
+        questionChoice(questionNumber+1);
         if (playerNumber >= (players.length - 1)) {
             setPlayerNumber(0);
             setPlayerToAnswer(players[0].playerName);
-            setQuestionNumber(questionNumber+1)
+
         }
         else {
             setPlayerNumber(playerNumber + 1);
             setPlayerToAnswer(players[playerNumber + 1].playerName);
-            setQuestionNumber(questionNumber+1)
 
         }
-        if(quiz[questionNumber] === quiz[quiz.length-1]){
+        if (quiz[questionNumber] === quiz[quiz.length - 1]) {
             goTo('/quiz/results');
-
         }
     }
 
@@ -48,6 +82,7 @@ function Quiz() {
         <h2>{playerToAnswer}</h2>
         <form onSubmit={onSubmitAnswer}>
             <h2>question:{!quiz[questionNumber] ? null : quiz[questionNumber].question}</h2>
+            <h1>{!quiz[questionNumber] ? "hello" : renderAnswers()}</h1>
             <button>ANSWER</button>
         </form>
         <BackButton />
