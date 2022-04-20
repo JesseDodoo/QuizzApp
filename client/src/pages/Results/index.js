@@ -8,14 +8,16 @@ function Results (){
     const dispatch = useDispatch();
 
     const players = useSelector(state => state.players);
+    const quiz = useSelector(state => state.quiz);
 
     function renderScores(){
         const displayArray = [];
+        const maxScore = (quiz.length)*5;
         players.sort((a, b) => (a.score > b.score ? -1 : 1))
         const winner = players[0];
-        displayArray.push(<h1>WINNNNNER: {winner.playerName}, score: {winner.score}</h1>)
+        displayArray.push(<h1>WINNNNNER: {winner.playerName}, scored: {winner.score} out of {maxScore}, correct answers: {winner.score/5}/{maxScore/5}</h1>)
         for (let i = 1; i < players.length; i++){
-            displayArray.push(<h2> {i+1} place: {players[i].playerName}, score: {players[i].score}</h2>)
+            displayArray.push(<h2> {i+1} place: {players[i].playerName}, scored: {players[i].score} out of {maxScore}, correct answers: {players[i].score/5}/{maxScore/5}</h2>)
         }
 
         return displayArray;

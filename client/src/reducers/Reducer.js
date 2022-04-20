@@ -1,4 +1,4 @@
-const initState = { players: [], quiz: [], loading: false, error: false };
+const initState = { players: [], quiz: [], loading: true, error: false };
 
 
 
@@ -7,7 +7,9 @@ const Reducer = (state = initState, action) => {
         case 'LOADING_PLAYERS':
             return { ...state, players: action.payload, loading: true };
         case 'LOADING_QUIZ':
-            return { ...state, quiz: action.payload, loading: true };
+            return { ...state, quiz: action.payload, loading: false };
+        case 'LOADING':
+            return { ...state, loading: true };
         case 'EMPTY_QUIZ':
             return initState;
         case 'SET_ERROR':

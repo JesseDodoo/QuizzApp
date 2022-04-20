@@ -10,7 +10,8 @@ function Quiz() {
     const goTo = Navigate();
     const players = useSelector(state => state.players);
     const quiz = useSelector(state => state.quiz);
-  
+    const loading = useSelector(state => state.loading);
+    console.log('loading', loading)
     const [playerNumber, setPlayerNumber] = useState(Math.floor(Math.random() * players.length));
     const [playerToAnswer, setPlayerToAnswer] = useState(players[playerNumber]);
     const [questionNumber, setQuestionNumber] = useState(0);
@@ -153,10 +154,10 @@ function Quiz() {
 
     return (<>
         <h1>Quiz page</h1>
-        <h2>{!quiz[questionNumber] ? null : playerToAnswer.playerName}, score:{!quiz[questionNumber] ? null : playerToAnswer.score}</h2>
+        <h2>{loading ? 'loading' : playerToAnswer.playerName}, score:{loading ? 'loading' : playerToAnswer.score}</h2>
         <form onSubmit={onSubmitAnswer}>
-            <h2>question:{!quiz[questionNumber] ? null : renderQuestion()}</h2>
-            {!quiz[questionNumber] ? "hello" : renderAnswers()}
+            <h2>question:{loading ? 'loading' : renderQuestion()}</h2>
+            {loading ? 'loading' : renderAnswers()}
             <button>ANSWER</button>
         </form>
         <BackButton />

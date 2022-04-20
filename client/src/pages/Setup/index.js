@@ -124,7 +124,7 @@ function Setup() {
         <br></br>
         <label>Category</label>
         <select onChange={getCategory} name="trivia_category">
-          <option value="any">Any Category</option>
+          <option value="">Any Category</option>
           <option value="9">General Knowledge</option>
           <option value="10">Entertainment: Books</option>
           <option value="11">Entertainment: Film</option>
@@ -152,7 +152,7 @@ function Setup() {
         </select>
         <br></br>
         <select onChange={getDifficulty} name="trivia_difficulty">
-          <option value="any">Any Difficulty</option>
+          <option value="">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
@@ -160,7 +160,7 @@ function Setup() {
         <br></br>
         <select onChange={getTriviaType} name="trivia_type">
           &gt;
-          <option value="any">Any Type</option>
+          <option value="">Any Type</option>
           <option value="multiple">Multiple Choice</option>
           <option value="boolean">True / False</option>
         </select>
