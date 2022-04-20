@@ -2,20 +2,28 @@ import React, { useState } from 'react';
 import { BackButton } from '../../components'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate as Navigate } from 'react-router-dom';
+import { updateScore } from '../../actions';
 
 function Quiz() {
+    const dispatch = useDispatch();
+
     const goTo = Navigate();
     const players = useSelector(state => state.players);
     const quiz = useSelector(state => state.quiz);
+  
     const [playerNumber, setPlayerNumber] = useState(Math.floor(Math.random() * players.length));
-    const [playerToAnswer, setPlayerToAnswer] = useState(players[playerNumber].playerName);
+    const [playerToAnswer, setPlayerToAnswer] = useState(players[playerNumber]);
     const [questionNumber, setQuestionNumber] = useState(0);
     const [questionAnswers, setQuestionAnswers] = useState();
+    const [answerChosen, setAnswerChosen] = useState("")
+
     //console.log("player to answer", playerToAnswer);
     //console.log('playerNumber', playerNumber)
     //console.log('the players', players);
     //console.log('quiz value', quiz)
     //console.log('questionAnswers', questionAnswers)
+
+    console.log('answerChosen', answerChosen)
 
 
     function questionChoice(questionNumber) {
@@ -38,9 +46,13 @@ function Quiz() {
                 setQuestionAnswers(choiceArray);
 
             }
-
         }
-        
+    }
+
+
+    function selectAnAnswer(e){
+        setAnswerChosen(e.target.textContent);
+
     }
 
     function renderAnswers(){
@@ -48,10 +60,9 @@ function Quiz() {
             questionChoice(questionNumber);
         }
         else{
-            return questionAnswers.map(answer => <h2>{answer}</h2>)
+            return questionAnswers.map(answer => <h2 onClick={selectAnAnswer}>{answer}</h2>)
         }
   
-
     }
 
 
@@ -64,25 +75,42 @@ function Quiz() {
         questionChoice(questionNumber+1);
         if (playerNumber >= (players.length - 1)) {
             setPlayerNumber(0);
-            setPlayerToAnswer(players[0].playerName);
+
+            setPlayerToAnswer(players[playerNumber]);
+
 
         }
         else {
             setPlayerNumber(playerNumber + 1);
-            setPlayerToAnswer(players[playerNumber + 1].playerName);
+            setPlayerToAnswer(players[playerNumber + 1]);
 
         }
         if (quiz[questionNumber] === quiz[quiz.length - 1]) {
             goTo('/quiz/results');
+
+            setQuestionAnswers([])
+        }
+        if(answerChosen === quiz[questionNumber].correct_answer){
+            console.log(`${playerToAnswer.playerName} answered ${answerChosen} it was correct!`);
+            setAnswerChosen("");
+            let theUpdatedScore = playerToAnswer.score + 5;
+            dispatch(updateScore(playerToAnswer.playerName, theUpdatedScore))
+            playerToAnswer.score = theUpdatedScore;
+            console.log(theUpdatedScore)
+        }
+        else{
+            console.log(`${playerToAnswer.playerName} answered ${answerChosen} it was incorrect!`);
+            setAnswerChosen("");
+
         }
     }
 
     return (<>
         <h1>Quiz page</h1>
-        <h2>{playerToAnswer}</h2>
+        <h2>{playerToAnswer.playerName}, score:{playerToAnswer.score}</h2>
         <form onSubmit={onSubmitAnswer}>
             <h2>question:{!quiz[questionNumber] ? null : quiz[questionNumber].question}</h2>
-            <h1>{!quiz[questionNumber] ? "hello" : renderAnswers()}</h1>
+            {!quiz[questionNumber] ? "hello" : renderAnswers()}
             <button>ANSWER</button>
         </form>
         <BackButton />
