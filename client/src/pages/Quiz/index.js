@@ -31,8 +31,35 @@ function Quiz() {
         }
         else{
             if (quiz[questionNumber].type === 'multiple') {
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace('&',"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(&quot\;)/g,"\"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(&#039\;)/g,"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(#039\;)/g,"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(&shy\;)/g,"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(&Eacute\;)/g,"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(&ldquo\;)/g,"\"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(&rsquo\;)/g,"\'");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(&hellip\;)/g,"...");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(&rdquo\;)/g,"\"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(amp\;)/g,"&");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(acute\;)/g,"");
+                quiz[questionNumber].correct_answer = quiz[questionNumber].correct_answer.replace(/(lrm\;)/g,"");
+        
                 choiceArray.push(quiz[questionNumber].correct_answer);
                 for (let i = 0; i < quiz[questionNumber].incorrect_answers.length; i++) {
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&quot\;)/g,"\"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&#039\;)/g,"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(#039\;)/g,"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&shy\;)/g,"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&Eacute\;)/g,"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&ldquo\;)/g,"\"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&rsquo\;)/g,"\'");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&hellip\;)/g,"...");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&rdquo\;)/g,"\"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(acute\;)/g,"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace('&',"");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(amp\;)/g,"&");
+                    quiz[questionNumber].incorrect_answers[i] = quiz[questionNumber].incorrect_answers[i].replace(/(&lrm\;)/g,"");
                     choiceArray.push(quiz[questionNumber].incorrect_answers[i]);
                 }
                 choiceArray.sort(() => Math.random() - 0.5);
@@ -63,6 +90,22 @@ function Quiz() {
         }
   
 
+    }
+
+    function renderQuestion(){
+        let question = quiz[questionNumber].question.replace(/(&quot\;)/g,"\"");
+        question = question.replace(/(&#039\;)/g,"");
+        question = question.replace(/(&shy\;)/g,"");
+        question = question.replace(/(&ldquo\;)/g,"\"");
+        question = question.replace(/(&rsquo\;)/g,"\'");
+        question = question.replace(/(&hellip\;)/g,"...");
+        question = question.replace(/(&rdquo\;)/g,"\"");
+        question = question.replace(/(amp\;)/g,"");
+        question = question.replace(/(acute\;)/g,"");
+        question = question.replace(/(&lrm\;)/g,"");
+
+        return question;
+        
     }
 
 
@@ -113,7 +156,7 @@ function Quiz() {
         <h1>Quiz page</h1>
         <h2>{!quiz[questionNumber] ? null : playerToAnswer.playerName}, score:{!quiz[questionNumber] ? null : playerToAnswer.score}</h2>
         <form onSubmit={onSubmitAnswer}>
-            <h2>question:{!quiz[questionNumber] ? null : quiz[questionNumber].question}</h2>
+            <h2>question:{!quiz[questionNumber] ? null : renderQuestion()}</h2>
             {!quiz[questionNumber] ? "hello" : renderAnswers()}
             <button>ANSWER</button>
         </form>
