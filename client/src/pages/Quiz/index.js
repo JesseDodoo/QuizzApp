@@ -4,23 +4,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate as Navigate } from 'react-router-dom';
 import { updateScore } from '../../actions';
 
-
-
 function Quiz() {
     const dispatch = useDispatch();
+
     const goTo = Navigate();
     const players = useSelector(state => state.players);
     const quiz = useSelector(state => state.quiz);
+  
     const [playerNumber, setPlayerNumber] = useState(Math.floor(Math.random() * players.length));
     const [playerToAnswer, setPlayerToAnswer] = useState(players[playerNumber]);
     const [questionNumber, setQuestionNumber] = useState(0);
     const [questionAnswers, setQuestionAnswers] = useState();
     const [answerChosen, setAnswerChosen] = useState("")
+
     //console.log("player to answer", playerToAnswer);
     //console.log('playerNumber', playerNumber)
     //console.log('the players', players);
     //console.log('quiz value', quiz)
     //console.log('questionAnswers', questionAnswers)
+
     console.log('answerChosen', answerChosen)
 
 
@@ -44,10 +46,9 @@ function Quiz() {
                 setQuestionAnswers(choiceArray);
 
             }
-
         }
-        
     }
+
 
     function selectAnAnswer(e){
         setAnswerChosen(e.target.textContent);
@@ -62,7 +63,6 @@ function Quiz() {
             return questionAnswers.map(answer => <h2 onClick={selectAnAnswer}>{answer}</h2>)
         }
   
-
     }
 
 
@@ -75,7 +75,9 @@ function Quiz() {
         questionChoice(questionNumber+1);
         if (playerNumber >= (players.length - 1)) {
             setPlayerNumber(0);
+
             setPlayerToAnswer(players[playerNumber]);
+
 
         }
         else {
@@ -85,6 +87,7 @@ function Quiz() {
         }
         if (quiz[questionNumber] === quiz[quiz.length - 1]) {
             goTo('/quiz/results');
+
             setQuestionAnswers([])
         }
         if(answerChosen === quiz[questionNumber].correct_answer){
@@ -98,6 +101,7 @@ function Quiz() {
         else{
             console.log(`${playerToAnswer.playerName} answered ${answerChosen} it was incorrect!`);
             setAnswerChosen("");
+
         }
     }
 

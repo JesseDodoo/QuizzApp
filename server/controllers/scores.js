@@ -18,22 +18,33 @@ async function byId(req, res) {
   }
 }
 
-async function update(req,res){
-  try{
-    const update = await Score.updateScore(req.body.id, req.body.score); 
-    res.status(200).json(update)
-  } catch (err){
-    res.status(500).send(err)
+async function update(req, res) {
+  try {
+    const update = await Score.updateScore(req.body.id, req.body.score);
+    res.status(200).json(update);
+  } catch (err) {
+    res.status(500).send(err);
   }
 }
 
-async function newUser(req,res){
-  try{
+async function newUser(req, res) {
+  try {
     const newUser = await Score.newUser(req.body.username);
-    res.status(200).json(newUser)
-  } catch(err) {
-    res.status(500).send(err)
+    res.status(200).json(newUser);
+  } catch (err) {
+    res.status(500).send(err);
   }
 }
 
-module.exports = { all, byId, update, newUser };
+async function deleteUser(req, res) {
+  try {
+    console.log(req.params.id);
+    const userToDelete = await Score.findById(req.params.id);
+    const deletedUser = await userToDelete.delete();
+    res.status(200).json(deletedUser);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+module.exports = { all, byId, update, newUser, deleteUser };
