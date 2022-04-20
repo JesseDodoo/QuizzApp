@@ -3,6 +3,7 @@ import { BackButton } from '../../components'
 import { useNavigate as Navigate } from 'react-router-dom';
 import {getPlayers, getQuiz } from '../../actions';
 import { useDispatch } from 'react-redux';
+import './styles.css'
 
 
 
@@ -81,17 +82,20 @@ function Setup() {
     }
 
 
-
+    
     return (<>
-        <h1>Setup page</h1>
+        <BackButton />
+        <h1 className='header'>Setup page</h1>
         <form onSubmit={handleSubmit}>
+            <div className='background'>
+
             <label>Local or online?</label>
             <select name="onlineOrLocal">
                 <option value="">please select</option>
                 <option value="online">Online</option>
                 <option value="local">Local</option>
             </select>
-            <br></br>
+            
             <label>How many players?</label>
             <select onChange={playerCount} name="numberOfPlayers">
                 <option value="">please select</option>
@@ -100,9 +104,9 @@ function Setup() {
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
-            <br></br>
+            
             {!playerNumber ? null : renderPlayerInput()}
-            <br></br>
+            
             <label>Category</label>
             <select onChange={getCategory} name="trivia_category">
                 <option value="any">Any Category</option>
@@ -131,28 +135,31 @@ function Setup() {
                 <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
                 <option value="32">Entertainment: Cartoon &amp; Animations</option>
             </select>
-            <br></br>
+            
+            <label>Difficulty</label>
             <select onChange={getDifficulty} name="trivia_difficulty">
                 <option value="any">Any Difficulty</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
             </select>
-            <br></br>
+            
+            <label>Trivia Type</label>
             <select onChange={getTriviaType} name="trivia_type">&gt;
 			<option value="any">Any Type</option>
                 <option value="multiple">Multiple Choice</option>
                 <option value="boolean">True / False</option>
             </select>
-            <br></br>
-            <input onChange={questionCount} type='number'></input>
-            <br></br>
-            <button type="submit">PLAY</button>
+            
+            <label>How Many Questions</label>
+            <input  className="QInput" onChange={questionCount} type='number'></input>
+            
+            <button className="playBtn" type="submit">LET'S PLAY!</button>
 
 
+            </div>
         </form>
 
-        <BackButton />
     </>)
 
 }

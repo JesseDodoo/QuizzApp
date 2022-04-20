@@ -37,10 +37,11 @@ main {
     padding: 0px 0px ;
     margin-bottom: 20px;
     text-decoration: none;
-    /* background-color: orange; */
-    color: #CF1E0A;
-    background: linear-gradient(to bottom, #CF1E0A 0%, #F2FA14 100%);
-    -webkit-background-clip: text;
+    background-color: orange;
+    /* color: #CF1E0A; */
+    /* background: linear-gradient(to bottom, #CF1E0A 0%, #F2FA14 100%); */
+    /* -webkit-background-clip: text; */
+    -webkit-text-fill-color: linear-gradient(to bottom, #CF1E0A 0%, #F2FA14 100%);
     
 }
 
