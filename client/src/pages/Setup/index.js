@@ -6,32 +6,26 @@ import { useDispatch } from "react-redux";
 import './styles.css';
 
 function Setup() {
-  const goTo = Navigate();
-  const [playerNumber, setPlayerNumber] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const [playerName, setPlayerName] = useState([]);
-  const [category, setCategory] = useState();
-  const [difficulty, setDifficulty] = useState();
-  const [triviaType, setTriviaType] = useState();
-  const [mainPlayer, setMainPlayer] = useState();
+    const goTo = Navigate();
+    const [playerNumber, setPlayerNumber] = useState(0);
+    const [questionNumber, setQuestionNumber] = useState(0);
+    const [playerName, setPlayerName] = useState([])
+    const [category, setCategory] = useState();
+    const [difficulty, setDifficulty] = useState();
+    const [triviaType, setTriviaType] = useState();
+    const dispatch = useDispatch();
+    playerName.length = playerNumber;
+    console.log('playerName', playerName);
+    console.log('category value', category);
+    console.log('number of questions', questionNumber);
+    console.log('difficulty', difficulty);
+    console.log('type', triviaType);
+    console.log(" ");
 
-  useEffect(() => {
-    let playerCookie = getCookie("username");
-    setMainPlayer(playerCookie);
-  }, []);
 
-  function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+    function playerCount(e) {
+        setPlayerNumber(parseInt(e.target.value));
+
     }
     return "";
   }

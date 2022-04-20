@@ -22,8 +22,7 @@ function Quiz() {
     //console.log('the players', players);
     //console.log('quiz value', quiz)
     //console.log('questionAnswers', questionAnswers)
-
-    console.log('answerChosen', answerChosen)
+    //console.log('answerChosen', answerChosen)
 
 
     function questionChoice(questionNumber) {
@@ -42,7 +41,7 @@ function Quiz() {
                 setQuestionAnswers(choiceArray);
             }
             else{
-                choiceArray = ['true', 'false']
+                choiceArray = ['True', 'False']
                 setQuestionAnswers(choiceArray);
 
             }
@@ -60,7 +59,7 @@ function Quiz() {
             questionChoice(questionNumber);
         }
         else{
-            return questionAnswers.map(answer => <h2 onClick={selectAnAnswer}>{answer}</h2>)
+            return questionAnswers.map(answer => <h2 key={Math.random() * players.length} onClick={selectAnAnswer}>{answer}</h2>)
         }
   
     }
@@ -68,15 +67,37 @@ function Quiz() {
 
 
     function onSubmitAnswer(e) {
-        setQuestionNumber(questionNumber+1)
         e.preventDefault();
+        let theUpdatedScore;
+        setQuestionNumber(questionNumber+1)
         //console.log("you clicked the button");
         //console.log("question number", questionNumber)
         questionChoice(questionNumber+1);
+        if (quiz[questionNumber] === quiz[quiz.length - 1]) {
+            goTo('/quiz/results');
+        }
+        if(answerChosen === quiz[questionNumber].correct_answer){
+            console.log(`${players[playerNumber].playerName} answered ${answerChosen} it was correct!`);
+            theUpdatedScore = players[playerNumber].score;
+            theUpdatedScore += 5;
+            dispatch(updateScore(players[playerNumber].playerName, theUpdatedScore))
+            if(players.length === 1){
+                players[playerNumber].score = theUpdatedScore;
+            }
+            console.log("theUpdatedScore",theUpdatedScore)
+            console.log("playerToAnswer.score",players[playerNumber].score)
+            setAnswerChosen("");
+        }
+        else{
+            console.log(`${players[playerNumber].playerName} answered ${answerChosen} it was incorrect!`);
+            setAnswerChosen("");
+            if(players.length === 1){
+                players[playerNumber].score = players[playerNumber].score;
+            }
+        }
         if (playerNumber >= (players.length - 1)) {
             setPlayerNumber(0);
-
-            setPlayerToAnswer(players[playerNumber]);
+            setPlayerToAnswer(players[0]);
 
 
         }
@@ -85,29 +106,11 @@ function Quiz() {
             setPlayerToAnswer(players[playerNumber + 1]);
 
         }
-        if (quiz[questionNumber] === quiz[quiz.length - 1]) {
-            goTo('/quiz/results');
-
-            setQuestionAnswers([])
-        }
-        if(answerChosen === quiz[questionNumber].correct_answer){
-            console.log(`${playerToAnswer.playerName} answered ${answerChosen} it was correct!`);
-            setAnswerChosen("");
-            let theUpdatedScore = playerToAnswer.score + 5;
-            dispatch(updateScore(playerToAnswer.playerName, theUpdatedScore))
-            playerToAnswer.score = theUpdatedScore;
-            console.log(theUpdatedScore)
-        }
-        else{
-            console.log(`${playerToAnswer.playerName} answered ${answerChosen} it was incorrect!`);
-            setAnswerChosen("");
-
-        }
     }
 
     return (<>
         <h1>Quiz page</h1>
-        <h2>{playerToAnswer.playerName}, score:{playerToAnswer.score}</h2>
+        <h2>{!quiz[questionNumber] ? null : playerToAnswer.playerName}, score:{!quiz[questionNumber] ? null : playerToAnswer.score}</h2>
         <form onSubmit={onSubmitAnswer}>
             <h2>question:{!quiz[questionNumber] ? null : quiz[questionNumber].question}</h2>
             {!quiz[questionNumber] ? "hello" : renderAnswers()}
