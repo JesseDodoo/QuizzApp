@@ -3,6 +3,7 @@ import { BackButton } from "../../components";
 import { useNavigate as Navigate } from "react-router-dom";
 import { getPlayers, getQuiz } from "../../actions";
 import { useDispatch } from "react-redux";
+import './styles.css';
 
 function Setup() {
   const goTo = Navigate();
