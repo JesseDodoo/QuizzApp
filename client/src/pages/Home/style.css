@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
+
+body {
+    background: linear-gradient(90deg,#e200ff 10%, #ffff00 70%, #4900ff 100%);
+}
+.header{
+    font-family: 'Londrina Outline', cursive;
+    display: flex;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+.logo, .link {
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+    border-radius: 20px;
+    border-width: 10px;
+    padding: 50px 0px ;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+}
+
+.link {
+    font-family: 'Londrina Outline', cursive;
+    border-radius: 50px;
+    width: 40%;
+    padding: 0px 0px ;
+    margin-bottom: 20px;
+    text-decoration: none;
+    background-color: orange;
+    /* color: #CF1E0A; */
+    /* background: linear-gradient(to bottom, #CF1E0A 0%, #F2FA14 100%); */
+    /* -webkit-background-clip: text; */
+    -webkit-text-fill-color: linear-gradient(to bottom, #CF1E0A 0%, #F2FA14 100%);
+    
+}
+
+.link:hover {background-color: #3e8e41}
+
+
