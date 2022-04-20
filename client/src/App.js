@@ -1,5 +1,5 @@
 import React from 'react';
-import { About, Home, Leaderboard, Quiz, Results, Setup } from './pages/index'
+import { About, Home, Leaderboard, Quiz, Results, Setup, NotFound } from './pages/index'
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -12,6 +12,7 @@ function App() {
             <Route path="setup" element={<Setup />} />
             <Route path="quiz" element={<Quiz />}/>
             <Route path="quiz/results" element={<Results />} />
+            <Route path="*" element = {<NotFound />} />
         </Routes>
     </>)
 
