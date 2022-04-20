@@ -106,7 +106,7 @@ function Quiz() {
 
     return (<>
         <h1>Quiz page</h1>
-        <h2>{playerToAnswer.playerName}, score:{playerToAnswer.score}</h2>
+        <h2>{!quiz[questionNumber] ? null : playerToAnswer.playerName}, score:{!quiz[questionNumber] ? null : playerToAnswer.score}</h2>
         <form onSubmit={onSubmitAnswer}>
             <h2>question:{!quiz[questionNumber] ? null : quiz[questionNumber].question}</h2>
             {!quiz[questionNumber] ? "hello" : renderAnswers()}
