@@ -82,6 +82,9 @@ function Quiz() {
             theUpdatedScore = players[playerNumber].score;
             theUpdatedScore += 5;
             dispatch(updateScore(players[playerNumber].playerName, theUpdatedScore))
+            if(players.length === 1){
+                players[playerNumber].score = theUpdatedScore;
+            }
             console.log("theUpdatedScore",theUpdatedScore)
             console.log("playerToAnswer.score",players[playerNumber].score)
             setAnswerChosen("");
@@ -89,11 +92,14 @@ function Quiz() {
         else{
             console.log(`${players[playerNumber].playerName} answered ${answerChosen} it was incorrect!`);
             setAnswerChosen("");
+            if(players.length === 1){
+                players[playerNumber].score = players[playerNumber].score;
+            }
         }
         if (playerNumber >= (players.length - 1)) {
             setPlayerNumber(0);
             setPlayerToAnswer(players[0]);
-            playerToAnswer.score = theUpdatedScore;
+
 
         }
         else {
