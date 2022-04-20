@@ -11,6 +11,7 @@ function Quiz() {
     const players = useSelector(state => state.players);
     const quiz = useSelector(state => state.quiz);
     const loading = useSelector(state => state.loading);
+    const error = useSelector(state => state.error);
     console.log('loading', loading)
     const [playerNumber, setPlayerNumber] = useState(Math.floor(Math.random() * players.length));
     const [playerToAnswer, setPlayerToAnswer] = useState(players[playerNumber]);
@@ -154,11 +155,12 @@ function Quiz() {
 
     return (<>
         <h1>Quiz page</h1>
-        <h2>{loading ? 'loading' : playerToAnswer.playerName}, score:{loading ? 'loading' : playerToAnswer.score}</h2>
+        <h2>{loading ? null : playerToAnswer.playerName} score:{loading ? null : playerToAnswer.score}</h2>
         <form onSubmit={onSubmitAnswer}>
             <h2>question:{loading ? 'loading' : renderQuestion()}</h2>
-            {loading ? 'loading' : renderAnswers()}
+            {loading ? null : renderAnswers()}
             <button>ANSWER</button>
+            { error ? <p role = 'alert'> Oops there's been an error! {error}</p> : null}
         </form>
         <BackButton />
     </>)
