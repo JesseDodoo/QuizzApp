@@ -3,32 +3,28 @@ import { BackButton } from "../../components";
 import { useNavigate as Navigate } from "react-router-dom";
 import { getPlayers, getQuiz } from "../../actions";
 import { useDispatch } from "react-redux";
-import './styles.css';
+import "./styles.css";
 
 function Setup() {
-    const goTo = Navigate();
-    const [playerNumber, setPlayerNumber] = useState(0);
-    const [questionNumber, setQuestionNumber] = useState(0);
-    const [playerName, setPlayerName] = useState([])
-    const [category, setCategory] = useState("");
-    const [difficulty, setDifficulty] = useState("");
-    const [triviaType, setTriviaType] = useState("");
-    const dispatch = useDispatch();
-    playerName.length = playerNumber;
-    console.log('playerName', playerName);
-    console.log('category value', category);
-    console.log('number of questions', questionNumber);
-    console.log('difficulty', difficulty);
-    console.log('type', triviaType);
-    console.log(" ");
+  const goTo = Navigate();
+  const [playerNumber, setPlayerNumber] = useState(0);
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [playerName, setPlayerName] = useState([]);
+  const [category, setCategory] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [triviaType, setTriviaType] = useState("");
+  const dispatch = useDispatch();
+  playerName.length = playerNumber;
+  console.log("playerName", playerName);
+  console.log("category value", category);
+  console.log("number of questions", questionNumber);
+  console.log("difficulty", difficulty);
+  console.log("type", triviaType);
+  console.log(" ");
 
-
-    function playerCount(e) {
-        setPlayerNumber(parseInt(e.target.value));
-
-    }
-    
-
+  function playerCount(e) {
+    setPlayerNumber(parseInt(e.target.value));
+  }
 
   playerName.length = playerNumber;
   console.log("playerName", playerName);
@@ -47,6 +43,7 @@ function Setup() {
     for (let i = 0; i < playerNumber; i++) {
       inputAreas.push(
         <input
+          required
           type="text"
           className="nameInput"
           key={i}
@@ -105,23 +102,25 @@ function Setup() {
       <h1>Setup page</h1>
       <form onSubmit={handleSubmit}>
         <label>Local or online?</label>
-        <select name="onlineOrLocal">
+
+        <select required name="onlineOrLocal">
           <option value="">please select</option>
           <option value="online">Online</option>
           <option value="local">Local</option>
         </select>
-        <br></br>
         <label>How many players?</label>
-        <select onChange={playerCount} name="numberOfPlayers">
+        <select required onChange={playerCount} name="numberOfPlayers">
           <option value="">please select</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
         </select>
-        <br></br>
-        {!playerNumber ? null : renderPlayerInput()}
-        <br></br>
+
+        <div className="inputContainer">
+          {!playerNumber ? null : renderPlayerInput()}
+        </div>
+
         <label>Category</label>
         <select onChange={getCategory} name="trivia_category">
           <option value="">Any Category</option>
@@ -150,23 +149,24 @@ function Setup() {
           <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
           <option value="32">Entertainment: Cartoon &amp; Animations</option>
         </select>
-        <br></br>
         <select onChange={getDifficulty} name="trivia_difficulty">
           <option value="">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
-        <br></br>
         <select onChange={getTriviaType} name="trivia_type">
           &gt;
           <option value="">Any Type</option>
           <option value="multiple">Multiple Choice</option>
           <option value="boolean">True / False</option>
         </select>
-        <br></br>
-        <input onChange={questionCount} type="number"></input>
-        <br></br>
+        <input
+          required
+          onChange={questionCount}
+          placeholder="Number of Questions"
+          type="number"
+        ></input>
         <button type="submit">PLAY</button>
       </form>
 
