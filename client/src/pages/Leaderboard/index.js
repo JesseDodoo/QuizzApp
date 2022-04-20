@@ -81,40 +81,39 @@ function Leaderboard() {
     console.log(scoresList[0])
 
     return (
-    <>
-        <h1 className="LeaderboardTitle">Leaderboard page</h1>
-        <BackButton />
+        <section className='ScoreSection container'>
+            <h1 className="LeaderboardTitle">Leaderboard page</h1>
+            <BackButton />
 
-        {/* Select how many to show on page select */}
-        <label htmlFor="ScoresPerPage"># to show per page:</label>
-        <select name = 'ScoresPerPage' id = 'ScoresPerPage' className='ChangeScoresPerPageSelect'>
-            <option value = "5" defaultValue>5</option>
-            <option value = "10">10</option>
-            <option value = "25">25</option>
-            <option value = "50">50</option>
-            <option value = "100">100</option>
-        </select>
-        <button onClick={changeScoresPerPage} className = "ChangeScoresPerPageButton">Refresh</button>
+            {/* Select how many to show on page select */}
+            <label htmlFor="ScoresPerPage"># to show per page:</label>
+            <select name = 'ScoresPerPage' id = 'ScoresPerPage' className='ChangeScoresPerPageSelect'>
+                <option value = "5" defaultValue>5</option>
+                <option value = "10">10</option>
+                <option value = "25">25</option>
+                <option value = "50">50</option>
+                <option value = "100">100</option>
+            </select>
+            <button onClick={changeScoresPerPage} className = "ChangeScoresPerPageButton">Refresh</button>
 
-        <br/>
+            <br/>
 
-        {/* Pagination buttons */}
-        <button onClick = {clickPrev} className="PaginationButton" >Prev</button>   
-        <Pagination scoresPerPage={scoresPerPage} totalScores={scoresList.length} paginate={paginate} />
-        <button  onClick = {clickNext} className="PaginationButton">Next</button>
+            {/* Pagination buttons */}
+            { currentPage > 1 ? (<button onClick = {clickPrev} className="PaginationButton" >Prev</button>) : ''}
+            <Pagination scoresPerPage={scoresPerPage} totalScores={scoresList.length} paginate={paginate} />
+            { currentPage < Math.ceil(scoresList.length/scoresPerPage) ? (<button  onClick = {clickNext} className="PaginationButton">Next</button>) : ''}
 
-        {/* Output to generate scores */}
+            {/* Output to generate scores */}
 
-        score board
+            score board
 
-        {scoresList.length > 0? (<TopScore key = {scoresList[0].id} score={scoresList[0]} rank={scoresList[0].rank} />) : 'No top score found'}
+            {scoresList.length > 0? (<TopScore key = {scoresList[0].id} score={scoresList[0]} rank={scoresList[0].rank} />) : 'No top score found'}
 
-        <br/>
-        {scoresList.length > 0 ? (<Scores scores = {currentScores} loading={loading} />) : 'No scores found' }  
+            <br/>
+            {scoresList.length > 0 ? (<Scores scores = {currentScores} loading={loading} />) : 'No scores found' }  
 
-
-
-    </>)
+        </section>
+    )
 
 }
 
