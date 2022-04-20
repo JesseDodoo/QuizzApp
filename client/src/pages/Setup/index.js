@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 
 
 function Setup() {
-
     const goTo = Navigate();
     const [playerNumber, setPlayerNumber] = useState(0);
     const [questionNumber, setQuestionNumber] = useState(0);
@@ -23,6 +22,9 @@ function Setup() {
     console.log('difficulty', difficulty);
     console.log('type', triviaType);
     console.log(" ");
+
+
+
 
 
 

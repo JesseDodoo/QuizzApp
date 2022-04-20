@@ -7,6 +7,8 @@ const getQuizInfo = (quiz) => ({ type: 'LOADING_QUIZ', payload: quiz });
 
 export const updateScore = (playerName, score) => ({type: 'SET_SCORE', payload: {playerName, score}})
 
+export const emptyQuiz = () => ({type: 'EMPTY_QUIZ'})
+
 export const getQuiz = (questionNumber, category, difficulty, type) => {
     console.log('all variables going to getQuiz', questionNumber, category, difficulty, type)
     return async dispatch => {
