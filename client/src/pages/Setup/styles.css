@@ -35,7 +35,7 @@ form {
 
 select {
     font-family: 'Gurajada', serif;
-    border: 1px solid red;
+    border: 1px solid rgb(212, 7, 7);
     /* color: #1c87c9; */
     font-size: 22px;
     background-color: #eee;
