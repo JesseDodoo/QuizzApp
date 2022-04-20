@@ -4,18 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate as Navigate } from 'react-router-dom';
 import { updateScore } from '../../actions';
 
-
-
 function Quiz() {
     const dispatch = useDispatch();
+
     const goTo = Navigate();
     const players = useSelector(state => state.players);
     const quiz = useSelector(state => state.quiz);
+  
     const [playerNumber, setPlayerNumber] = useState(Math.floor(Math.random() * players.length));
     const [playerToAnswer, setPlayerToAnswer] = useState(players[playerNumber]);
     const [questionNumber, setQuestionNumber] = useState(0);
     const [questionAnswers, setQuestionAnswers] = useState();
     const [answerChosen, setAnswerChosen] = useState("")
+
     //console.log("player to answer", playerToAnswer);
     //console.log('playerNumber', playerNumber)
     //console.log('the players', players);
@@ -71,10 +72,9 @@ function Quiz() {
                 setQuestionAnswers(choiceArray);
 
             }
-
         }
-        
     }
+
 
     function selectAnAnswer(e){
         setAnswerChosen(e.target.textContent);
@@ -89,7 +89,6 @@ function Quiz() {
             return questionAnswers.map(answer => <h2 key={Math.random() * players.length} onClick={selectAnAnswer}>{answer}</h2>)
         }
   
-
     }
 
     function renderQuestion(){

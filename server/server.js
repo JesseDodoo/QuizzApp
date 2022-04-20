@@ -12,8 +12,8 @@ server.use("/scores", scoreRoutes);
 let msg = `
 <ul> 
 <p>Quiz App:</p>
-<li>/   Returns all scores from the db</li>
-<li>/:id   Returns specific score by id</li>
+<li>/scores   Returns all scores from the db</li>
+<li>scores/:id   Returns specific score by id</li>
 </ul>`;
 server.get("/", (req, res) => res.send(msg));
 
