@@ -10,9 +10,9 @@ function Setup() {
     const [playerNumber, setPlayerNumber] = useState(0);
     const [questionNumber, setQuestionNumber] = useState(0);
     const [playerName, setPlayerName] = useState([])
-    const [category, setCategory] = useState();
-    const [difficulty, setDifficulty] = useState();
-    const [triviaType, setTriviaType] = useState();
+    const [category, setCategory] = useState("");
+    const [difficulty, setDifficulty] = useState("");
+    const [triviaType, setTriviaType] = useState("");
     const dispatch = useDispatch();
     playerName.length = playerNumber;
     console.log('playerName', playerName);
@@ -27,10 +27,9 @@ function Setup() {
         setPlayerNumber(parseInt(e.target.value));
 
     }
-    return "";
-  }
+    
 
-  const dispatch = useDispatch();
+
   playerName.length = playerNumber;
   console.log("playerName", playerName);
   console.log("category value", category);
@@ -92,6 +91,7 @@ function Setup() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const mainPlayer = "";
     dispatch(getQuiz(questionNumber, category, difficulty, triviaType));
     dispatch(getPlayers(playerName));
     if (!mainPlayer) {
