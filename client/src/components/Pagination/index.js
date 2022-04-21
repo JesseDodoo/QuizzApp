@@ -12,18 +12,18 @@ const Pagination = ({scoresPerPage,totalScores, paginate }) =>
 
   
   return (
-    <nav>
-        <ul className='pagination'>
+    <section className='PaginationSection' >
+        <div className='Pagination'>
           {pageNumbers.map( number => 
           (
-            <li key={number} className="page-item">
+            <div key={number} className="PagBtn" >
               <a onClick = {() => paginate(number)} className='page-link'>
                 {number}
               </a>
-            </li>
+            </div>
           ))}
-        </ul>
-    </nav>    
+        </div>
+    </section>    
   )
 }
 

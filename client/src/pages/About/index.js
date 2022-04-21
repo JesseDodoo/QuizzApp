@@ -1,6 +1,6 @@
 import React from 'react';
 import {BackButton} from '../../components'
-
+import './styles.css'
 
 function About (){
     return(<>

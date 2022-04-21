@@ -3,6 +3,7 @@
 body {
     background: linear-gradient(90deg,#e200ff 10%, #ffff00 70%, #4900ff 100%);
 }
+
 .header{
     font-family: 'Londrina Outline', cursive;
     display: flex;
