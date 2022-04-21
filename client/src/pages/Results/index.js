@@ -16,8 +16,9 @@ function Results() {
     const winner = players[0];
     displayArray.push(
       <h1>
-        WINNNNNER: {winner.playerName}, scored: {winner.score} out of {maxScore}
-        , correct answers: {winner.score / 5}/{maxScore / 5}
+        WINNNNNER: {winner.playerName}, scored: {winner.score} out of{" "}
+        {maxScore / players.length}, correct answers: {winner.score / 5}/
+        {maxScore / 5 / players.length}
       </h1>
     );
     for (let i = 1; i < players.length; i++) {
@@ -25,7 +26,8 @@ function Results() {
         <h2>
           {" "}
           {i + 1} place: {players[i].playerName}, scored: {players[i].score} out
-          of {maxScore}, correct answers: {players[i].score / 5}/{maxScore / 5}
+          of {maxScore / players.length}, correct answers:{" "}
+          {players[i].score / 5}/{maxScore / 5 / players.length}
         </h2>
       );
     }
