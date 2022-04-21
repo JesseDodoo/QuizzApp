@@ -231,7 +231,7 @@ function Quiz() {
         <form onSubmit={onSubmitAnswer}>
             <h2>question:{error ? error.message : loading ? 'loading' : renderQuestion()}</h2>
             {loading ? null : renderAnswers()}
-            <button>ANSWER</button>
+            {error ? error.message : <button>ANSWER</button>}
             { error ? <p role = 'alert'> Oops there's been an error! {error}</p> : null}
         </form>
         <BackButton />
