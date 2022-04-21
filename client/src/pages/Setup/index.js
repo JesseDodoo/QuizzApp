@@ -13,7 +13,33 @@ function Setup() {
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [triviaType, setTriviaType] = useState("");
+  const [mainPlayer, setMainPlayer] = useState("");
+
+  useEffect(() => {
+    let playerExists = getCookie("username");
+    if (playerExists) {
+      setMainPlayer(playerExists);
+      setPlayerNumber(1);
+    }
+  }, []);
   const dispatch = useDispatch();
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
   playerName.length = playerNumber;
   console.log("playerName", playerName);
   console.log("category value", category);
@@ -41,16 +67,30 @@ function Setup() {
   function renderPlayerInput() {
     let inputAreas = [];
     for (let i = 0; i < playerNumber; i++) {
-      inputAreas.push(
-        <input
-          required
-          type="text"
-          className="nameInput"
-          key={i}
-          onChange={getPlayerName}
-          placeholder="enter player name"
-        ></input>
-      );
+      if (i == 0 && mainPlayer) {
+        inputAreas.push(
+          <input
+            required
+            type="text"
+            className="nameInput"
+            value={mainPlayer}
+            key={i}
+            onChange={getPlayerName}
+            placeholder="enter player name"
+          ></input>
+        );
+      } else {
+        inputAreas.push(
+          <input
+            required
+            type="text"
+            className="nameInput"
+            key={i}
+            onChange={getPlayerName}
+            placeholder="enter player name"
+          ></input>
+        );
+      }
     }
     return inputAreas;
   }
@@ -88,7 +128,6 @@ function Setup() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const mainPlayer = "";
     dispatch(getQuiz(questionNumber, category, difficulty, triviaType));
     dispatch(getPlayers(playerName));
     if (!mainPlayer) {
