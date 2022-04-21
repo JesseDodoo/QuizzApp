@@ -41,14 +41,17 @@ class Score {
     return new Promise(async (res, rej) => {
       try {
         const db = await init();
+        console.log(id, incrementor);
         const scoreData = await db
           .collection("scores")
           .findOneAndUpdate(
             { _id: ObjectId(id) },
-            { $inc: { score: incrementor } }
+            { $inc: { score: incrementor } },
+            { returnDocument: "after" }
           );
-        let score = new Score(scoreData);
-        res(score);
+        console.log(scoreData.value);
+        let scoreRes = new Score(scoreData.value);
+        res(scoreRes);
       } catch (error) {
         rej("Error updating score: " + error);
       }
@@ -62,8 +65,8 @@ class Score {
         const user = await db
           .collection("scores")
           .insertOne({ username: username, score: 0 });
-        let newUser = new Score(user);
-        res(newUser);
+        let userObject = await Score.findById(user.insertedId);
+        res(userObject);
       } catch (error) {
         rej("Error creating user: " + error);
       }

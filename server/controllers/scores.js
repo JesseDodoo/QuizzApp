@@ -20,6 +20,7 @@ async function byId(req, res) {
 
 async function update(req, res) {
   try {
+    console.log(req.body.id, req.body.score);
     const update = await Score.updateScore(req.body.id, req.body.score);
     res.status(200).json(update);
   } catch (err) {
@@ -30,7 +31,7 @@ async function update(req, res) {
 async function newUser(req, res) {
   try {
     const newUser = await Score.newUser(req.body.username);
-    res.status(200).json(newUser);
+    res.status(201).json(newUser);
   } catch (err) {
     res.status(500).send(err);
   }
