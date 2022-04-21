@@ -26,7 +26,7 @@
 
 
 
-.BackBtn, .PaginationButton {
+.BackBtn {
     font-family: 'Londrina Outline', cursive;
     font-size: 20px;
     font-weight: bold;
@@ -39,7 +39,7 @@
     background-color: orange;
 }
 
-.BackBtn:hover, .PaginationButton:hover{
+.BackBtn:hover{
     background-color: #3e8e41;
     cursor: pointer;
 }
@@ -88,8 +88,8 @@
 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items:center;
 
 
     border: 1px solid red;
@@ -100,6 +100,7 @@
     padding-bottom:1vh;
 
     width:50%;
+    height:19vh;
 
 
     color:black;
@@ -114,6 +115,7 @@
     margin-left:1vw;
     color:black;
     font-size:1rem;
+    font-weight: bold;
 }
 
 .TopScoreContainer
@@ -121,13 +123,16 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 0px;
+    margin-bottom: 1vh;;
 }
 
 .TopScoreItem
 {
     font-family: 'Londrina Solid', cursive;
     color:black;
-    font-size:1.5rem;
+    font-size:1.25rem;
+    font-weight: bold;
 }
 
 .ShowPerPageSection
@@ -146,7 +151,7 @@
     padding-bottom:1vh;
 
     width:40vw;
-    height:1vh;
+    height:1.5vh;
 
     background-color: orange;
 }
@@ -163,7 +168,7 @@
 {
     font-family: 'Londrina Solid', cursive;
     color:black;
-    font-size:.75rem;
+    font-size:1rem;
     
 }
 
@@ -173,10 +178,23 @@
     flex-direction: row;
 }
 
-.PaginationButton
-{
-    display: block;
+.PaginationButton {
+    font-family: 'Londrina Solid', cursive;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 2.5px;
+    border-radius: 20px;
+    padding: 15px 0px;
+    text-align: center;
+    width: 20%;
+    background-color: orange;
 }
+
+.PaginationButton:hover{
+    background-color: #3e8e41;
+    cursor: pointer;
+}
+
 
 #ScoresPerPage
 {
@@ -198,6 +216,8 @@
     border:.5px solid red;
 
     -webkit-background-clip: inherit;
+
+    color:black;
 }
 
 .ShowPerPageContainer
@@ -205,6 +225,7 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    font-weight: bold;
 }
 
 .PagBtn
@@ -219,6 +240,10 @@
     text-align: center;
     background-color: orange;
     border: 1px solid red;
+}
+.page-link
+{
+    font-family: 'Londrina Solid', cursive;
 }
 
 .PagBtn:hover{
@@ -235,4 +260,19 @@
 {
     display: flex;
     justify-content: center;
+}
+
+.title
+{
+    margin-top:1vh;
+    margin-bottom:1vh;
+}
+
+.RefreshBtn
+{
+    border: .5px solid red;
+    background-color: orange;
+    font-family: 'Londrina Solid', cursive;
+    font-weight: bold;
+    font-size:1rem
 }

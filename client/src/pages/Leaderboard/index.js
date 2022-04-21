@@ -84,7 +84,7 @@ function Leaderboard() {
 
     return (
         <section className='ScoreSection container'>
-            <h1 className="header">Leaderboard</h1>
+            <h1 className="header title">Leaderboard</h1>
 
             {/* Output to generate scores */}
 
@@ -92,7 +92,7 @@ function Leaderboard() {
             {scoresList.length > 0? (<TopScore key = {scoresList[0].id} score={scoresList[0]} rank={scoresList[0].rank} />) : 'No top score found'}
 
             <div className="OtherWinners">
-                <h3 className='header'>WINNERS</h3>
+                <h3 className='header title'>WINNERS</h3>
             </div>
 
              {/* Select how many to show on page select */}
