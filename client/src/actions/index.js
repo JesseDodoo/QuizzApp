@@ -29,32 +29,63 @@ export const getQuiz = (questionNumber, category, difficulty, type) => {
             else if(!category && difficulty && type){
                 const { data }  = await axios.get(`https://opentdb.com/api.php?amount=${questionNumber}&difficulty=${difficulty}&type=${type}`);
                 console.log("response of fetch here", data)
-                await dispatch(getQuizInfo(data.results));
+                if(data.response_code === 0){
+                    await dispatch(getQuizInfo(data.results));
+                }
+                else{
+                    throw Error('not a valid input!')
+                }
             }
             else if(category && !difficulty && type){
                 const { data }  = await axios.get(`https://opentdb.com/api.php?amount=${questionNumber}&category=${category}&type=${type}`);
                 console.log("response of fetch here", data)
-                await dispatch(getQuizInfo(data.results));
+                if(data.response_code === 0){
+                    await dispatch(getQuizInfo(data.results));
+                }
+                else{
+                    throw Error('not a valid input!')
+                }
             }
             else if(category && difficulty && !type){
                 const { data }  = await axios.get(`https://opentdb.com/api.php?amount=${questionNumber}&difficulty=${difficulty}&category=${category}`);
                 console.log("response of fetch here", data)
-                await dispatch(getQuizInfo(data.results));
+                if(data.response_code === 0){
+                    await dispatch(getQuizInfo(data.results));
+                }
+                else{
+                    throw Error('not a valid input!')
+                }
             }
             else if(category && !difficulty && !type){
                 const { data }  = await axios.get(`https://opentdb.com/api.php?amount=${questionNumber}&category=${category}`);
                 console.log("response of fetch here", data)
-                await dispatch(getQuizInfo(data.results));
+                if(data.response_code === 0){
+                    await dispatch(getQuizInfo(data.results));
+                }
+                else{
+                    throw Error('not a valid input!')
+                }
             }
             else if(!category && difficulty && !type){
                 const { data }  = await axios.get(`https://opentdb.com/api.php?amount=${questionNumber}&difficulty=${difficulty}`);
                 console.log("response of fetch here", data)
-                await dispatch(getQuizInfo(data.results));
+                if(data.response_code === 0){
+                    await dispatch(getQuizInfo(data.results));
+                }
+                else{
+                    throw Error('not a valid input!')
+                }
             }
             else if(!category && !difficulty && type){
                 const { data }  = await axios.get(`https://opentdb.com/api.php?amount=${questionNumber}&type=${type}`);
                 console.log("response of fetch here", data)
-                await dispatch(getQuizInfo(data.results));
+                if(data.response_code === 0){
+                    await dispatch(getQuizInfo(data.results));
+                }
+                else{
+                    throw Error('not a valid input!')
+                }
+                
             }
             else{
                 const { data }  = await axios.get(`https://opentdb.com/api.php?amount=${questionNumber}`);
