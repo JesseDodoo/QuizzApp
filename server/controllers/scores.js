@@ -30,7 +30,7 @@ async function update(req, res) {
 async function newUser(req, res) {
   try {
     const newUser = await Score.newUser(req.body.username);
-    res.status(200).json(newUser);
+    res.status(201).json(newUser);
   } catch (err) {
     res.status(500).send(err);
   }

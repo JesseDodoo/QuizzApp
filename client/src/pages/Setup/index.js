@@ -16,13 +16,19 @@ function Setup() {
   const [mainPlayer, setMainPlayer] = useState("");
 
   useEffect(() => {
-    let playerExists = getCookie("username");
+    let playerExists = getCookie("userId");
     if (playerExists) {
-      setMainPlayer(playerExists);
+      fetchUser(playerExists);
       setPlayerNumber(1);
     }
   }, []);
   const dispatch = useDispatch();
+
+  async function fetchUser(id) {
+    const response = await fetch(`http://localhost:3000/scores/${id}`);
+    let { username } = await response.json();
+    setMainPlayer(username);
+  }
 
   function getCookie(cname) {
     let name = cname + "=";
@@ -126,12 +132,22 @@ function Setup() {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     dispatch(getQuiz(questionNumber, category, difficulty, triviaType));
     dispatch(getPlayers(playerName));
     if (!mainPlayer) {
-      document.cookie = `username=${playerName[0].playerName}; expires=Thu, 18 Dec 2050 12:00:00 UTC`;
+      try {
+        let response = await fetch(`http://localhost:3000/scores`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: playerName[0].playerName }),
+        });
+        let { id } = await response.json();
+        document.cookie = `userId=${id}; expires=Thu, 18 Dec 2050 12:00:00 UTC`;
+      } catch (err) {
+        console.log(err);
+      }
     }
     goTo("/quiz");
   }
