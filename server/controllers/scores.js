@@ -20,6 +20,7 @@ async function byId(req, res) {
 
 async function update(req, res) {
   try {
+    console.log(req.body.id, req.body.score);
     const update = await Score.updateScore(req.body.id, req.body.score);
     res.status(200).json(update);
   } catch (err) {

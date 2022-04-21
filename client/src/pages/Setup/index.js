@@ -29,14 +29,13 @@ function Setup() {
     let { username } = await response.json();
     setMainPlayer(username);
     let playerArray = [];
-    playerArray.push({playerName: username, score: 0});
-    setPlayerName(playerArray)
+    playerArray.push({ playerName: username, score: 0 });
+    setPlayerName(playerArray);
+    dispatch({
+      type: "SET_MAIN",
+      payload: { playerName: username, id: id },
+    });
   }
-
-
-  
-
-
 
   function getCookie(cname) {
     let name = cname + "=";
@@ -151,7 +150,12 @@ function Setup() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username: playerName[0].playerName }),
         });
-        let { id } = await response.json();
+        let { id, username } = await response.json();
+        setMainPlayer(username);
+        dispatch({
+          type: "SET_MAIN",
+          payload: { playerName: username, id: id },
+        });
         document.cookie = `userId=${id}; expires=Thu, 18 Dec 2050 12:00:00 UTC`;
       } catch (err) {
         console.log(err);

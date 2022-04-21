@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { emptyQuiz } from "../../actions";
@@ -8,6 +8,27 @@ function Results() {
 
   const players = useSelector((state) => state.players);
   const quiz = useSelector((state) => state.quiz);
+  const mainPlayer = useSelector((state) => state.mainPlayer);
+  const [newScore, setNewScore] = useState("");
+  useEffect(() => {
+    const player = players.find(
+      (p) => p.playerName == mainPlayer[0].playerName
+    );
+    fetchScore(mainPlayer[0].id, player.score);
+  }, []);
+
+  async function fetchScore(id, scoreIncrementor) {
+    const response = await fetch(`http://localhost:3000/scores`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+        score: scoreIncrementor,
+      }),
+    });
+    let resp = await response.json();
+    setNewScore(resp.score);
+  }
 
   function renderScores() {
     const displayArray = [];
@@ -42,6 +63,9 @@ function Results() {
   return (
     <>
       <h1>Results page</h1>
+      <h1>
+        {mainPlayer[0].playerName} Overall Score is now: {newScore} points!
+      </h1>
       {renderScores()}
       <h1>PLAY AGAIN?</h1>
       <NavLink onClick={emptyTheQuiz} to="/setup">
