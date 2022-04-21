@@ -50,6 +50,7 @@ function Setup() {
         return c.substring(name.length, c.length);
       }
     }
+  }
    
   playerName.length = playerNumber;
   console.log("playerName", playerName);

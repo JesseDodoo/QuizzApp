@@ -79,9 +79,6 @@ function Leaderboard() {
         setCurrentPage(1);
     }
 
-    console.log("Scorelist")
-    console.log(scoresList[0])
-
     return (
         <section className='ScoreSection container'>
             <h1 className="header title">Leaderboard</h1>
