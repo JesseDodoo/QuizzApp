@@ -15,29 +15,12 @@ function Setup() {
     const [triviaType, setTriviaType] = useState();
     const dispatch = useDispatch();
     playerName.length = playerNumber;
-    console.log('playerName', playerName);
-    console.log('category value', category);
-    console.log('number of questions', questionNumber);
-    console.log('difficulty', difficulty);
-    console.log('type', triviaType);
+    console.log("playerName", playerName);
+    console.log("category value", category);
+    console.log("number of questions", questionNumber);
+    console.log("difficulty", difficulty);
+    console.log("type", triviaType);
     console.log(" ");
-
-
-    function playerCount(e) {
-        setPlayerNumber(parseInt(e.target.value));
-
-    }
-    return "";
-  }
-
-  const dispatch = useDispatch();
-  playerName.length = playerNumber;
-  console.log("playerName", playerName);
-  console.log("category value", category);
-  console.log("number of questions", questionNumber);
-  console.log("difficulty", difficulty);
-  console.log("type", triviaType);
-  console.log(" ");
 
   function playerCount(e) {
     setPlayerNumber(parseInt(e.target.value));
