@@ -4,9 +4,9 @@ const Score = (score) => {
 
   return (
     <div className='ScoreDiv'>
-        <p>Rank: {score.rank}</p>
-        <p>Player Name: {score.score.username} </p>
-        <p>Player score: {score.score.score} </p>
+        <p className="ScoreItem">#{score.rank}</p>
+        <p className="ScoreItem">Name: {score.score.username} </p>
+        <p className="ScoreItem">Score: {score.score.score} </p>
     </div>
   )
 }

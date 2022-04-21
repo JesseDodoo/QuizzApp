@@ -50,21 +50,7 @@ function Setup() {
         return c.substring(name.length, c.length);
       }
     }
-    return "";
-  }
-
-  playerName.length = playerNumber;
-  console.log("mainPlayer", mainPlayer);
-  console.log("category value", category);
-  console.log("number of questions", questionNumber);
-  console.log("difficulty", difficulty);
-  console.log("type", triviaType);
-  console.log(" ");
-
-  function playerCount(e) {
-    setPlayerNumber(parseInt(e.target.value));
-  }
-
+   
   playerName.length = playerNumber;
   console.log("playerName", playerName);
   console.log("category value", category);
@@ -72,6 +58,7 @@ function Setup() {
   console.log("difficulty", difficulty);
   console.log("type", triviaType);
   console.log(" ");
+
 
   function playerCount(e) {
     setPlayerNumber(parseInt(e.target.value));

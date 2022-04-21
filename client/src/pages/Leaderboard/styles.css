@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gurajada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100&family=Pacifico&display=swap');
+
+.header{
+    font-family: 'Londrina Outline', cursive;
+    display: flex;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+
+
+.background {
+    opacity: 1; 
+    padding-top: 20px;
+    font-family: 'Londrina Outline', cursive;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 2rem;
+}
+
+
+
+.BackBtn {
+    font-family: 'Londrina Outline', cursive;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 2.5px;
+    border-radius: 20px;
+    padding: 15px 0px;
+    text-align: center;
+    width: 20%;
+    background-color: orange;
+}
+
+.BackBtn:hover{
+    background-color: #3e8e41;
+    cursor: pointer;
+}
+
+.ScoreSection
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.ScoreDisplaySection
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ShowPerPageSection
+{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.ScoreDiv
+{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-around;
+
+    border: 1px solid red;
+    border-radius: 20px;
+    border-width: 1px;
+
+    padding-top:1vh;
+    padding-bottom:1vh;
+
+    width:40vw;
+    height:1vh;
+
+    background-color: orange;
+}
+
+.TopScoreDiv
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items:center;
+
+
+    border: 1px solid red;
+    border-radius: 20px;
+    border-width: 1px;
+
+    padding-top:1vh;
+    padding-bottom:1vh;
+
+    width:50%;
+    height:19vh;
+
+
+    color:black;
+    font-size:1.5rem;
+
+    background-color: orange;
+}
+
+.ScoreItem
+{
+    font-family: 'Londrina Solid', cursive;
+    margin-left:1vw;
+    color:black;
+    font-size:1rem;
+    font-weight: bold;
+}
+
+.TopScoreContainer
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0px;
+    margin-bottom: 1vh;;
+}
+
+.TopScoreItem
+{
+    font-family: 'Londrina Solid', cursive;
+    color:black;
+    font-size:1.25rem;
+    font-weight: bold;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.ShowPerPageSection
+{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-around;
+
+    border-style: solid;
+    border: 1px solid red;
+    border-radius: 20px;
+    border-width: 1px;
+
+    padding-top:1vh;
+    padding-bottom:1vh;
+
+    width:40vw;
+    height:1.5vh;
+
+    background-color: orange;
+}
+
+.PaginationSection
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.NoToShowPerPage
+{
+    font-family: 'Londrina Solid', cursive;
+    color:black;
+    font-size:1rem;
+    
+}
+
+.Pagination
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.PaginationButton {
+    font-family: 'Londrina Solid', cursive;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 2.5px;
+    border-radius: 20px;
+    padding: 15px 0px;
+    text-align: center;
+    width: 20%;
+    background-color: orange;
+}
+
+.PaginationButton:hover{
+    background-color: #3e8e41;
+    cursor: pointer;
+}
+
+
+#ScoresPerPage
+{
+    background-color: orange;
+    font-family: 'Londrina Solid', cursive;
+
+    margin-top:0px;
+
+    border-radius: 0px;
+
+    padding:0px;
+
+    width:10%;
+
+    text-align: center;
+
+    margin-bottom: 0px;
+
+    border:.5px solid red;
+
+    -webkit-background-clip: inherit;
+
+    color:black;
+}
+
+.ShowPerPageContainer
+{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
+
+.PagBtn
+{
+    font-family: 'Londrina Outline', cursive;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 2.5px;
+    border-radius: 20px;
+    padding: 15px 0px;
+    text-align: center;
+    background-color: orange;
+    border: 1px solid red;
+}
+.page-link
+{
+    font-family: 'Londrina Solid', cursive;
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.PagBtn:hover{
+    background-color: #3e8e41;
+    cursor: pointer;
+}
+
+.PagBtn:active
+{
+    color:red;
+}
+
+.BackBtnSection
+{
+    display: flex;
+    justify-content: center;
+}
+
+.title
+{
+    margin-top:1vh;
+    margin-bottom:1vh;
+}
+
+.RefreshBtn
+{
+    border: .5px solid red;
+    background-color: orange;
+    font-family: 'Londrina Solid', cursive;
+    font-weight: bold;
+    font-size:1rem
+}

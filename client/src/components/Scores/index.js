@@ -6,16 +6,9 @@ import TopScore from '../TopScore';
 
 const Scores = (scores) => {
 
-
-  let rank = 0;
-
   return (
-    <section>
-
-        <h3> OTHER SCORES</h3>
-
+    <section className='ScoreDisplaySection'>
         {scores.scores.slice(1).map((score) => (<Score key = {score.id} score = {score} rank = {score.rank} /> ) )}
-
     </section>
   )
 }
