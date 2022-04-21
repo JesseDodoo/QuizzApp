@@ -62,8 +62,8 @@ class Score {
         const user = await db
           .collection("scores")
           .insertOne({ username: username, score: 0 });
-        let newUser = new Score(user);
-        res(newUser);
+        let userObject = await Score.findById(user.insertedId);
+        res(userObject);
       } catch (error) {
         rej("Error creating user: " + error);
       }

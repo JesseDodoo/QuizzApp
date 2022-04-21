@@ -3,32 +3,68 @@ import { BackButton } from "../../components";
 import { useNavigate as Navigate } from "react-router-dom";
 import { getPlayers, getQuiz } from "../../actions";
 import { useDispatch } from "react-redux";
-import './styles.css';
+import "./styles.css";
 
 function Setup() {
-    const goTo = Navigate();
-    const [playerNumber, setPlayerNumber] = useState(0);
-    const [questionNumber, setQuestionNumber] = useState(0);
-    const [playerName, setPlayerName] = useState([])
-    const [category, setCategory] = useState("");
-    const [difficulty, setDifficulty] = useState("");
-    const [triviaType, setTriviaType] = useState("");
-    const dispatch = useDispatch();
-    playerName.length = playerNumber;
-    console.log('playerName', playerName);
-    console.log('category value', category);
-    console.log('number of questions', questionNumber);
-    console.log('difficulty', difficulty);
-    console.log('type', triviaType);
-    console.log(" ");
+  const goTo = Navigate();
+  const [playerNumber, setPlayerNumber] = useState(0);
+  const [questionNumber, setQuestionNumber] = useState(10);
+  const [playerName, setPlayerName] = useState([]);
+  const [category, setCategory] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [triviaType, setTriviaType] = useState("");
+  const [mainPlayer, setMainPlayer] = useState("");
 
-
-    function playerCount(e) {
-        setPlayerNumber(parseInt(e.target.value));
-
+  useEffect(() => {
+    let playerExists = getCookie("userId");
+    if (playerExists) {
+      fetchUser(playerExists);
+      setPlayerNumber(1);
     }
-    
+  }, []);
+  const dispatch = useDispatch();
 
+  async function fetchUser(id) {
+    const response = await fetch(`http://localhost:3000/scores/${id}`);
+    let { username } = await response.json();
+    setMainPlayer(username);
+    let playerArray = [];
+    playerArray.push({playerName: username, score: 0});
+    setPlayerName(playerArray)
+  }
+
+
+  
+
+
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  playerName.length = playerNumber;
+  console.log("mainPlayer", mainPlayer);
+  console.log("category value", category);
+  console.log("number of questions", questionNumber);
+  console.log("difficulty", difficulty);
+  console.log("type", triviaType);
+  console.log(" ");
+
+  function playerCount(e) {
+    setPlayerNumber(parseInt(e.target.value));
+  }
 
   playerName.length = playerNumber;
   console.log("playerName", playerName);
@@ -45,20 +81,35 @@ function Setup() {
   function renderPlayerInput() {
     let inputAreas = [];
     for (let i = 0; i < playerNumber; i++) {
-      inputAreas.push(
-        <input
-          type="text"
-          className="nameInput"
-          key={i}
-          onChange={getPlayerName}
-          placeholder="enter player name"
-        ></input>
-      );
+      if (i == 0 && mainPlayer) {
+        inputAreas.push(
+          <input
+            required
+            type="text"
+            className="nameInput"
+            value={mainPlayer}
+            key={i}
+            onChange={getPlayerName}
+            placeholder="enter player name"
+          ></input>
+        );
+      } else {
+        inputAreas.push(
+          <input
+            required
+            type="text"
+            className="nameInput"
+            key={i}
+            onChange={getPlayerName}
+            placeholder="enter player name"
+          ></input>
+        );
+      }
     }
     return inputAreas;
   }
 
-  function getPlayerName(e) {
+  function getPlayerName() {
     let allPlayers = [];
     let playerNameInput = document.getElementsByClassName("nameInput");
     for (let i = 0; i < playerNumber; i++) {
@@ -89,13 +140,22 @@ function Setup() {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const mainPlayer = "";
     dispatch(getQuiz(questionNumber, category, difficulty, triviaType));
     dispatch(getPlayers(playerName));
     if (!mainPlayer) {
-      document.cookie = `username=${playerName[0].playerName}; expires=Thu, 18 Dec 2050 12:00:00 UTC`;
+      try {
+        let response = await fetch(`http://localhost:3000/scores`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: playerName[0].playerName }),
+        });
+        let { id } = await response.json();
+        document.cookie = `userId=${id}; expires=Thu, 18 Dec 2050 12:00:00 UTC`;
+      } catch (err) {
+        console.log(err);
+      }
     }
     goTo("/quiz");
   }
@@ -105,23 +165,25 @@ function Setup() {
       <h1>Setup page</h1>
       <form onSubmit={handleSubmit}>
         <label>Local or online?</label>
-        <select name="onlineOrLocal">
+
+        <select required name="onlineOrLocal">
           <option value="">please select</option>
           <option value="online">Online</option>
           <option value="local">Local</option>
         </select>
-        <br></br>
         <label>How many players?</label>
-        <select onChange={playerCount} name="numberOfPlayers">
+        <select required onChange={playerCount} name="numberOfPlayers">
           <option value="">please select</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
         </select>
-        <br></br>
-        {!playerNumber ? null : renderPlayerInput()}
-        <br></br>
+
+        <div className="inputContainer">
+          {!playerNumber ? null : renderPlayerInput()}
+        </div>
+
         <label>Category</label>
         <select onChange={getCategory} name="trivia_category">
           <option value="">Any Category</option>
@@ -150,23 +212,24 @@ function Setup() {
           <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
           <option value="32">Entertainment: Cartoon &amp; Animations</option>
         </select>
-        <br></br>
         <select onChange={getDifficulty} name="trivia_difficulty">
           <option value="">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
-        <br></br>
         <select onChange={getTriviaType} name="trivia_type">
           &gt;
           <option value="">Any Type</option>
           <option value="multiple">Multiple Choice</option>
           <option value="boolean">True / False</option>
         </select>
-        <br></br>
-        <input onChange={questionCount} type="number"></input>
-        <br></br>
+        <input
+          required
+          onChange={questionCount}
+          placeholder="Number of Questions"
+          type="number"
+        ></input>
         <button type="submit">PLAY</button>
       </form>
 
