@@ -33,26 +33,6 @@ form {
 
 }
 
-.Somethingelse {
-    font-family: 'Gurajada', serif;
-    border: 1px solid rgb(212, 7, 7);
-    /* color: #1c87c9; */
-    font-size: 22px;
-    background-color: #eee;
-    border-radius: 5px;
-    appearance: none;
-    cursor: pointer;
-}
-
-.something{
-    margin-bottom: 50px;
-    width: 8%;
-    color: #CF1E0A;
-    border: 1px solid red;
-    background-color: linear-gradient(to bottom, #CF1E0A 0%, #F2FA14 100%);
-    -webkit-background-clip: text;
-}
-
 .playBtn {
     font-family: 'Londrina Outline', cursive;
     font-size: 20px;
@@ -90,5 +70,18 @@ option {
     text-align: center;
 } 
 
+.HowToPlaySection
+{
+    border: 1px solid red;
+    background-color: orange;
+    width: 80vw;
+    margin-bottom: 1vh;
+}
 
+.AboutWrapper
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 

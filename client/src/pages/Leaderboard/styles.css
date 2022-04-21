@@ -244,6 +244,8 @@
 .page-link
 {
     font-family: 'Londrina Solid', cursive;
+    padding-left:5px;
+    padding-right:5px;
 }
 
 .PagBtn:hover{
