@@ -1,0 +1,10 @@
+.answer{
+    background: #ccc;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.selected{
+    background-color: gold;
+}
