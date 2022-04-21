@@ -155,9 +155,9 @@ function Quiz() {
 
     return (<>
         <h1>Quiz page</h1>
-        <h2>{loading ? null : playerToAnswer.playerName} score:{loading ? null : playerToAnswer.score}</h2>
+        <h2>{error ? error.message : loading ? null : playerToAnswer.playerName} score:{loading ? null : playerToAnswer.score}</h2>
         <form onSubmit={onSubmitAnswer}>
-            <h2>question:{loading ? 'loading' : renderQuestion()}</h2>
+            <h2>question:{error ? error.message : loading ? 'loading' : renderQuestion()}</h2>
             {loading ? null : renderAnswers()}
             <button>ANSWER</button>
             { error ? <p role = 'alert'> Oops there's been an error! {error}</p> : null}
