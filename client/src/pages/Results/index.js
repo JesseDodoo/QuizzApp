@@ -39,17 +39,17 @@ function Results() {
     displayArray.push(
       <h1 className="ResultItem">
         WINNNNNER: {winner.playerName}, scored: {winner.score} out of{" "}
-        {maxScore / players.length}, correct answers: {winner.score / 5}/
-        {maxScore / 5 / players.length}
+        {Math.ceil(maxScore / players.length)}, correct answers: {Math.ceil(winner.score / 5)}/
+        {Math.ceil(maxScore / 5 / players.length)}
       </h1>
     );
     for (let i = 1; i < players.length; i++) {
       displayArray.push(
-        <h2>
+        <h2 className="ResultItem">
           {" "}
           {i + 1} place: {players[i].playerName}, scored: {players[i].score} out
-          of {maxScore / players.length}, correct answers:{" "}
-          {players[i].score / 5}/{maxScore / 5 / players.length}
+          of {Math.ceil(maxScore / players.length)}, correct answers:{" "}
+          {Math.ceil(players[i].score / 5)}/{Math.ceil(maxScore / 5 / players.length)}
         </h2>
       );
     }
