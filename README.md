@@ -22,22 +22,16 @@ We began by brainstorming all the ideas for the application. We came up with thi
 
 ## Wins & Challenges
 ### Wins
+
+- Fully Functioning App
+- Deployed
+- Utilised Redux
+- Got Socket.IO somewhat working
 ### Challenges
 
-# Design docs
-## DB schema
+- Testing
+- Persisting Data
+- Quiz Logic
 
-![](GHimages/schema.png)
-
-# Api and server testing %s
-![](GHimages/apitest.png)
-
-# Email functionality
-
-Users receive emails from Tingle or Navi if they miss a habit, or hit a streak of 10 for that habit
-
-![](GHimages/Forgot.png)
-
-![](GHimages/streak.png)
 
 
