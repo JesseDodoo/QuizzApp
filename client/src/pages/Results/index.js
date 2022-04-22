@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { emptyQuiz } from "../../actions";
+import './styles.css'
 
 function Results() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function Results() {
     players.sort((a, b) => (a.score > b.score ? -1 : 1));
     const winner = players[0];
     displayArray.push(
-      <h1>
+      <h1 className="ResultItem">
         WINNNNNER: {winner.playerName}, scored: {winner.score} out of{" "}
         {maxScore / players.length}, correct answers: {winner.score / 5}/
         {maxScore / 5 / players.length}
@@ -61,20 +62,24 @@ function Results() {
   }
 
   return (
-    <>
-      <h1>Results page</h1>
-      <h1>
-        {mainPlayer.playerName} Overall Score is now: {newScore} points!
-      </h1>
-      {renderScores()}
-      <h1>PLAY AGAIN?</h1>
-      <NavLink onClick={emptyTheQuiz} to="/setup">
-        <h1>YES</h1>
-      </NavLink>
-      <NavLink onClick={emptyTheQuiz} to="/">
-        <h1>NO</h1>
-      </NavLink>
-    </>
+    <section className="ResultsContainer">
+      <h1 className="header">Results page</h1>
+      <section className="ResultsSection">
+        <h1 className="ResultItem">
+          {mainPlayer.playerName} Overall Score is now: {newScore} points!
+        </h1>
+        {renderScores()}
+        <h1 className="PlayAgain">PLAY AGAIN?</h1>
+        <section className="ResultBtnSection">
+          <NavLink className="ResultBtn" onClick={emptyTheQuiz} to="/setup">
+            <h1 >YES</h1>
+          </NavLink>
+          <NavLink className="ResultBtn" onClick={emptyTheQuiz} to="/">
+            <h1 >NO</h1>
+          </NavLink>
+        </section>
+      </section>
+    </section>
   );
 }
 
