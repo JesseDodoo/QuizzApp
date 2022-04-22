@@ -15,8 +15,7 @@
 We began by brainstorming all the ideas for the application. We came up with this to begin with:
 ![](https://i.imgur.com/QHllheM.png)
 
-**(open image a new tab)**
-![](https://i.imgur.com/QHllheM.png)
+
 
 ## License
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
