@@ -2,6 +2,17 @@
 
 ## Installation and Usage
 
+### Installation:
+
+- Clone or download repo
+- Navigate to the root folder
+- Install Docker and Node
+
+### Usage:
+
+- run `bash _scripts/startDev.sh`
+- navigate to `client` and `npm run dev`
+
 ## Technologies
 * React
 * Redux
