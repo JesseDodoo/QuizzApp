@@ -41,7 +41,6 @@ class Score {
     return new Promise(async (res, rej) => {
       try {
         const db = await init();
-        console.log(id, incrementor);
         const scoreData = await db
           .collection("scores")
           .findOneAndUpdate(
@@ -49,7 +48,6 @@ class Score {
             { $inc: { score: incrementor } },
             { returnDocument: "after" }
           );
-        console.log(scoreData.value);
         let scoreRes = new Score(scoreData.value);
         res(scoreRes);
       } catch (error) {

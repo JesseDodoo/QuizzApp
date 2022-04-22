@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --legacy-watch index.js"
+    "dev": "nodemon --legacy-watch index.js",
+    "test": "jest --watchAll --detectOpenHandles --runInBand --verbose  --coverage",
+    "unitTests": "jest --testPathPattern=/unit/ --watchAll --verbose",
+    "coverage": "jest --testPathPattern=/unit/ --coverage"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "jest": "^27.5.1",
     "mongodb": "^4.5.0",
     "nodemon": "^2.0.15",
-    "jest": "^27.5.1",
+    "socket.io": "^4.4.1",
     "supertest": "^6.2.2"
   }
 }

@@ -4,6 +4,7 @@ const initState = {
   loading: true,
   error: false,
   mainPlayer: [],
+  quizData: {},
 };
 
 const Reducer = (state = initState, action) => {
@@ -33,6 +34,8 @@ const Reducer = (state = initState, action) => {
     case "SET_MAIN":
       const updatedMain = [action.payload];
       return { ...state, mainPlayer: updatedMain };
+    case "SET_DATA":
+      return { ...state, quizData: action.payload };
 
     default:
       return state;
